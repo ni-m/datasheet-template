@@ -70,6 +70,25 @@
 \gdef\@revision{}
 \newcommand{\revision}[1]{\gdef\@revision{#1}}
 
+\gdef\@footerLeft{}
+\newcommand{\footerLeft}[1]{\gdef\@footerLeft{#1}}
+
+\gdef\@subtitle{}
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+
+\newcommand{\HRule}{\noindent\rule{\linewidth}{2pt}}
+\newcommand{\@condensedline}[1]{\scalebox{.8}[1.0]{#1}\par}
+
+\renewcommand{\maketitle}{%
+  \thispagestyle{titlepage}%
+  \begingroup
+    \centering\Large\bfseries
+    \@condensedline{\@title}%
+    \ifx\@subtitle\@empty\else\@condensedline{\MakeUppercase{\@subtitle}}\fi
+  \endgroup
+  \HRule\par
+}
+
 \fancypagestyle{titlepage}{
 \fancyhf{}
 \rhead{\parbox[][\headheight][t]{5cm}{\normalsize\raggedleft \textbf{\@projectname}}}
