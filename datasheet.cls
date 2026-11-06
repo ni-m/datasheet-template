@@ -57,6 +57,8 @@
 \usepackage{xstring}   % used for gitHash extraction
 \usepackage{datetime2} % Use ISO 8601 for date display
 \usepackage{helvet}
+\usepackage{lastpage}
+
 \renewcommand{\familydefault}{\sfdefault}
 
 \setlength\columnsep{30pt} % This is the default columnsep for all pages
@@ -109,8 +111,8 @@
 \fancyhf{}
 \lhead{\bf \@projectname}
 \rhead{\includegraphics[width=3cm]{images/logo.png}}
-% \lfoot{Marco Niederberger, Yanick Schoch}
-\rfoot{\thepage}
+\lfoot{\@footerLeft}
+\rfoot{Rev. \@revision{} | \thepage{} of \pageref{LastPage}}
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{2pt}
 
