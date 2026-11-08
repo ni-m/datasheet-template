@@ -72,8 +72,8 @@
 \gdef\@revision{}
 \newcommand{\revision}[1]{\gdef\@revision{#1}}
 
-\gdef\@footerLeft{}
-\newcommand{\footerLeft}[1]{\gdef\@footerLeft{#1}}
+\gdef\@footerleft{}
+\newcommand{\footerleft}[1]{\gdef\@footerleft{#1}}
 
 \gdef\@subtitle{}
 \newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
@@ -86,16 +86,35 @@
   \begingroup
     \centering\Large\bfseries
     \@condensedline{\@title}%
-    \ifx\@subtitle\@empty\else\@condensedline{\MakeUppercase{\@subtitle}}\fi
+    \ifx\@subtitle\@empty\else\@condensedline{\@subtitle}\fi
   \endgroup
   \HRule\par
 }
 
+% --- Logo with fallback ---
+\gdef\@logo{images/logo}
+\newcommand{\logo}[1]{\gdef\@logo{#1}}
+
+\gdef\@logofile{}
+\AtBeginDocument{%
+  \@for\@ext:=.pdf,.png,.jpg,.jpeg\do{%
+    \ifx\@logofile\@empty
+      \IfFileExists{\@logo\@ext}{\xdef\@logofile{\@logo\@ext}}{}%
+    \fi}%
+  \ifx\@logofile\@empty
+    \IfFileExists{\@logo}{\xdef\@logofile{\@logo}}{}%
+  \fi
+  \if\@logofile\@empty
+    \ClassWarningNoLine{datasheet}{Logo file `\@logo' not found, logo omitted}%
+  \fi}
+
+\newcommand{\@insertlogo}[1]{%
+  \ifx\@logofile\@empty\else\includegraphics[#1]{\@logofile}\fi}
+
 \fancypagestyle{titlepage}{
 \fancyhf{}
 \rhead{\parbox[][\headheight][t]{5cm}{\normalsize\raggedleft \textbf{\@projectname}}}
-% \rhead{\textbf{\@projectname}}
-\lhead{\includegraphics[height=1.9cm]{images/logo.png}}
+\lhead{\@insertlogo{height=1.9cm}}
 \rfoot{\bf \@author}
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{2pt}
@@ -110,9 +129,10 @@
 \fancypagestyle{layoutAll}{
 \fancyhf{}
 \lhead{\bf \@projectname}
-\rhead{\includegraphics[width=3cm]{images/logo.png}}
-\lfoot{\@footerLeft}
-\rfoot{Rev. \@revision{} | \thepage{} of \pageref{LastPage}}
+\rhead{\@insertlogo{height=1cm}}
+\lfoot{\@footerleft}
+\rfoot{\ifx\@revision\@empty\else Rev.~\@revision\quad\textbar\quad\fi
+  \thepage{} of \pageref{LastPage}}
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{2pt}
 
