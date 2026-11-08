@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Marco Niederberger, marco@ni-m.ch
+Copyright (c) 2024 Marco Niederberger, marco@ni-m.ch
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
