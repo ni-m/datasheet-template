@@ -193,15 +193,19 @@
 %==============================================================================%
 % Page styles
 %==============================================================================%
-% Right footer: "Rev. x (hash) | Page n of m", empty parts are omitted
+% Right footer, empty parts are omitted:
+%   revision set:     "Rev. x (hash) | Page n of m"
+%   no revision:      "Commit hash | Page n of m"
+%   neither:          "Page n of m"
 \newcommand{\@revisionfooter}{%
   \footnotesize
-  \ifx\@revision\@empty\else Rev.~\@revision\fi
-  \ifx\@githash\@empty\else
-    \ifx\@revision\@empty\else\ \fi(\@githash)%
+  \ifx\@revision\@empty
+    \ifx\@githash\@empty\else Commit~\@githash\;\textbar\;\fi
+  \else
+    Rev.~\@revision
+    \ifx\@githash\@empty\else\ (\@githash)\fi
+    \;\textbar\;%
   \fi
-  \ifx\@revision\@empty\ifx\@githash\@empty\else\;\textbar\;\fi
-  \else\;\textbar\;\fi
   Page~\thepage{} of \pageref{LastPage}}
 
 % headheight + headsep is constant in both styles,
