@@ -131,8 +131,10 @@
 \lhead{\bf \@projectname}
 \rhead{\@insertlogo{height=1cm}}
 \lfoot{\@footerleft}
-\rfoot{\ifx\@revision\@empty\else Rev.~\@revision\quad\textbar\quad\fi
-  \thepage{} of \pageref{LastPage}}
+\rfoot{\footnotesize
+  \ifx\@revision\@empty\else Rev.~\@revision\;\fi
+  \ifx\@githash\@empty\else (\@githash)\fi
+  \;\textbar\;Page~\thepage{} of \pageref{LastPage}}
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{2pt}
 
@@ -148,12 +150,29 @@
 \belowdisplayskip=14pt plus 3pt minus 3pt
 \belowdisplayshortskip=14pt plus 3pt minus 3pt
 
-% Git hash extraction and custom cmd
-% \CatchFileDef{\headfull}{.git/HEAD}{}
-% \StrGobbleRight{\headfull}{1}[\head]
-% \StrBehind[2]{\head}{/}[\branch]
-% \IfFileExists{.git/refs/heads/\branch}{
-%     \CatchFileDef{\commit}{.git/refs/heads/\branch}{}
-% }{
-%     \newcommand{\commit}{\dots~(in \emph{packed-refs})}
-% }
+\newcommand{\dsplot}[3][]{%
+  \par\includegraphics[width=\columnwidth,#1]{#2}\par\nopagebreak
+  \vspace{2pt}{\small #3}\par
+  \vspace{\baselineskip}}
+
+\RequirePackage{catchfile,xstring,pdftexcmds}
+
+\gdef\@githash{}
+\newcommand{\githash}[1]{\gdef\@githash{#1}} % manual override
+
+\AtBeginDocument{%
+\ifx\@githash\@empty
+  \ifnum\pdf@shellescape=1
+    \CatchFileDef{\@githash}{|"git describe --always --dirty"}{\endlinechar=-1}%
+  \else
+    \IfFileExists{.git/HEAD}{%
+      \CatchFileDef{\@githead}{.git/HEAD}{\endlinechar=-1}%
+      \IfBeginWith{\@githead}{ref: }{%
+        \StrBehind{\@githead}{ref: }[\@gitref]%
+        \IfFileExists{.git/\@gitref}{%
+          \CatchFileDef{\@githead}{.git/\@gitref}{\endlinechar=-1}%
+          \StrLeft{\@githead}{7}[\@githash]}{}%
+      }{\StrLeft{\@githead}{7}[\@githash]}%
+    }{}%
+  \fi
+\fi}
