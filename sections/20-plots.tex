@@ -1,24 +1,11 @@
 \subsubsection*{TYPICAL CHARACTERISTICS}
 \begin{multicols}{2}
-    \centering
-    \includegraphics[width=\columnwidth]{images/plot.png}
-    First plot
-    \vspace{5pt}
-    \includegraphics[width=\columnwidth]{images/plot.png}
-    Third plot
-    \vspace{5pt}
-    \includegraphics[width=\columnwidth]{images/plot.png}
-    Fifth plot
-    \vspace{5pt}
-    
-    \columnbreak
-    \includegraphics[width=\columnwidth]{images/plot.png}
-    Second plot
-    \vspace{5pt}
-    \includegraphics[width=\columnwidth]{images/plot.png}
-    Fourth plot
-    \vspace{5pt}
-    \includegraphics[width=\columnwidth]{images/plot.png}
-    Sixth plot
-    \vspace{5pt}
+  \centering
+  \dsplot[page=1]{images/plots.pdf}{Lowpass}
+  \dsplot[page=2]{images/plots.pdf}{Highpass}
+  \dsplot[page=3]{images/plots.pdf}{Bandpass}
+  \columnbreak
+  \dsplot[page=4]{images/plots.pdf}{Bandstop}
+  \dsplot[page=5]{images/plots.pdf}{Chebyshev}
+  \dsplot[page=6]{images/plots.pdf}{Elliptic}
 \end{multicols}
