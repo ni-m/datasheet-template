@@ -263,6 +263,29 @@
 %==============================================================================%
 % Content macros
 %==============================================================================%
+% \dsheading{<TEXT>}: section heading with fixed, tight spacing
+\newcommand{\dsheading}[1]{%
+  \par\addvspace{\bigskipamount}%
+  {\normalsize\bfseries #1\par}\nopagebreak
+  \smallskip}
+
+% \begin{dsitems}{<HEADING>} \item ... \end{dsitems}
+% Compact bullet list with a heading, e.g. FEATURES or APPLICATIONS
+% Space after the list; the next \dsheading uses the larger of this and
+% its own \bigskipamount, so the two don't add up
+\newlength{\dsitemsafter}
+\setlength{\dsitemsafter}{1.5\bigskipamount}
+\newenvironment{dsitems}[1]
+  {\dsheading{#1}\begin{compactitem}}
+  {\end{compactitem}\par\addvspace{\dsitemsafter}}
+
+% \begin{abstract} text \end{abstract}: printed as DESCRIPTION
+\renewenvironment{abstract}
+  {\dsheading{DESCRIPTION}%
+   \setlength{\parskip}{0.5\baselineskip}%
+   \vspace{-\parskip}}% no paragraph gap below the heading
+  {\par}
+
 % \dsplot[<includegraphics options>]{<file>}{<caption>}
 % Column-wide plot with a caption kept close to its image.
 \newcommand{\dsplot}[3][]{%
