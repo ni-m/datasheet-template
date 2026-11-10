@@ -174,7 +174,7 @@
 % Title block
 %==============================================================================%
 % Horizontal rule below the title
-\newcommand{\HRule}{\noindent\rule{\linewidth}{2pt}}
+\newcommand{\@dsrule}{\noindent\rule{\linewidth}{2pt}} % internal, so documents may define their own \HRule
 
 % Horizontally condensed title line
 \newcommand{\@condensedline}[1]{\scalebox{.8}[1.0]{#1}\par}
@@ -187,7 +187,7 @@
     \@condensedline{\@title}%
     \ifx\@subtitle\@empty\else\@condensedline{\@subtitle}\fi
   \endgroup
-  \HRule\par}
+  \@dsrule\par}
 
 
 %==============================================================================%
