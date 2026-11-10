@@ -16,4 +16,4 @@
 *.fdb_latexmk
 
 example.pdf
-
+**/build/**
