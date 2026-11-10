@@ -11,7 +11,6 @@ A LaTeX class for technical datasheets in the style of common datasheets: logo h
 ## Features
 
 - Title page with logo, project name, title and subtitle
-- Consistent header and footer on all following pages
 - Two-column layout for features, applications and description
 - Full-width tables for absolute maximum ratings and electrical characteristics
 
@@ -32,11 +31,11 @@ A LaTeX class for technical datasheets in the style of common datasheets: logo h
 
 \begin{document}
 \maketitle
-... see example.tex for a complete walk-though
+% See example.tex for a complete walk-though
 \end{document}
 ```
 
-3. Build with your LaTex compiler.
+3. Build with your LaTeX compiler.
 
 See [`example.tex`](example.tex) for a complete example. The rendered PDF is attached to each [release](../../releases).
 
