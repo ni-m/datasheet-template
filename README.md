@@ -28,11 +28,11 @@ A LaTeX class for technical datasheets in the style of common datasheets: logo h
 \author{Marco Niederberger, Yanick Schoch}
 \projectname{Datasheet template}
 \revision{1.0}
-\logo{images/logo.png}
+\logo{images/logo.pdf}
 
 \begin{document}
 \maketitle
-...
+... see example.tex for a complete walk-though
 \end{document}
 ```
 
@@ -42,17 +42,28 @@ See [`example.tex`](example.tex) for a complete example. The rendered PDF is att
 
 ## Commands
 
-| Command                        | Description                                  |
-|--------------------------------|----------------------------------------------|
-| `\title{...}`                  | Main title line                              |
-| `\subtitle{...}`               | Second title line (optional)                 |
-| `\author{...}`                 | Shown in the footer of the title page        |
-| `\projectname{...}`            | Shown in the header of every page            |
-| `\footerleft{...}`             | Shown in the left footer of every page       |
-| `\logo{...}`                   | Path to logo file                            |
-| `\revision{...}`               | Document revision, shown in the footer       |
-| `\dsplot[opts]{file}{caption}` | Command to typeset a plot with a caption     |
-| `\maketitle`                   | Typesets the title block                     |
+## Commands
+
+| Command                          | Description                                                |
+|----------------------------------|------------------------------------------------------------|
+| `\title{...}`                    | Main title line                                            |
+| `\subtitle{...}`                 | Second title line (optional)                               |
+| `\author{...}`                   | Shown in the footer of the title page                      |
+| `\projectname{...}`              | Shown in the header of every page                          |
+| `\footerleft{...}`               | Left footer on the following pages (optional)              |
+| `\logo{...}`                     | Optional path to the logo                                  |
+| `\revision{...}`                 | Optional revision in the footer                            |
+| `\githash{...}`                  | Overrides the detected git hash                            |
+| `\maketitle`                     | Typesets the title block and sets the title page style     |
+| `\dsheading{...}`                | Section heading with consistent spacing                    |
+| `\dsplot[opts]{file}{caption}`   | Plot with caption; `opts` are passed to `\includegraphics` |
+
+## Environments
+
+| Environment                      | Description                                                          |
+|----------------------------------|----------------------------------------------------------------------|
+| `dsitems{heading}`               | Compact bullet list with a heading, e.g. `\begin{dsitems}{FEATURES}` |
+| `abstract`                       | Description text on the title page, typeset as DESCRIPTION           |
 
 ## Changelog
 
@@ -65,7 +76,7 @@ Please describe the change, and attach a screenshot or PDF when it affects the l
 
 ## Preview
 
-Update the overview.png file using the following commands:
+Update the overview.png file using the following commands (or running `docs/regenerate_overview.sh`)
 ```bash
 pdftoppm -png -r 150 -l 4 build/example.pdf page
 magick montage page-*.png -tile 4x1 -geometry +16+16 -bordercolor black -border 1 -background none -shadow images/overview.png
