@@ -82,6 +82,7 @@
 % General layout
 %==============================================================================%
 \setlength{\columnsep}{30pt} % default column separation on all pages
+\raggedcolumns % multicols: don't stretch vertical space to equalize column heights
 \setlength{\parindent}{0cm}
 \renewcommand{\arraystretch}{1.2}
 \setlength{\arrayrulewidth}{0.5pt}
