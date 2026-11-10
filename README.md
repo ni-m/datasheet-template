@@ -6,7 +6,7 @@
 
 A LaTeX class for technical datasheets in the style of common datasheets: logo header, two-column feature/description block, specification tables and characteristic plots.
 
-![Datasheet template overview](images/overview.png)
+![Datasheet template overview](docs/overview.png)
 
 ## Features
 
