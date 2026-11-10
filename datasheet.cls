@@ -183,6 +183,7 @@
 % \maketitle: title, optional subtitle and rule; sets the title page style
 \renewcommand{\maketitle}{%
   \thispagestyle{titlepage}%
+  \ifx\@logofile\@empty\enlargethispage{\@nologoshift}\fi
   \begingroup
     \centering\Large\bfseries
     \@condensedline{\@title}%
@@ -212,16 +213,34 @@
 % headheight + headsep is constant in both styles,
 % so the body starts at the same height on every page
 
-% Title page: large logo, project name on the right, author in the footer
+% Title page: logo on the left with a gap above the rule, project name on the
+% right, author in the footer.
+% Without a logo the header shrinks by \@nologoshift, so the body starts higher;
+% \maketitle enlarges the page and \footskip grows by the same amount,
+% so the footer stays in place and the text area gets taller.
+\newlength{\@logoheight}\setlength{\@logoheight}{1.9cm} % title page logo height
+\newlength{\@logogap}\setlength{\@logogap}{5mm}          % gap between logo and rule
+\newlength{\@nologoshift}
+\setlength{\@nologoshift}{1.6cm}
+\newlength{\@dsfootskip}
+\AtBeginDocument{\setlength{\@dsfootskip}{\footskip}}
 \fancypagestyle{titlepage}{%
   \fancyhf{}%
-  \lhead{\@insertlogo{height=1.9cm}}%
-  \rhead{\parbox[][\headheight][t]{5cm}{\normalsize\raggedleft\textbf{\@projectname}}}%
+  \lhead{\ifx\@logofile\@empty\else
+    \raisebox{\@logogap}{\@insertlogo{height=\@logoheight}}\fi}%
+  % project name: on the rule without logo, vertically centered on the logo with
+  \rhead{\bfseries\ifx\@logofile\@empty\@projectname\else
+    \raisebox{\dimexpr\@logogap+.5\@logoheight-.5\fontcharht\font`\X\relax}{\@projectname}\fi}%
   \rfoot{\bfseries\@author}%
   \renewcommand{\headrulewidth}{2pt}%
   \renewcommand{\footrulewidth}{2pt}%
-  \setlength{\headheight}{2cm}%
-  \setlength{\headsep}{1.3cm}%
+  \setlength{\headheight}{2.6cm}%
+  \setlength{\headsep}{0.7cm}%
+  \setlength{\footskip}{\@dsfootskip}%
+  \ifx\@logofile\@empty
+    \addtolength{\headheight}{-\@nologoshift}%
+    \addtolength{\footskip}{\@nologoshift}%
+  \fi
   \setlength{\abovecaptionskip}{1pt plus 3pt minus 2pt}%
 }
 
@@ -236,6 +255,7 @@
   \renewcommand{\footrulewidth}{2pt}%
   \setlength{\headheight}{2.3cm}%
   \setlength{\headsep}{1cm}%
+  \setlength{\footskip}{\@dsfootskip}%
   \setlength{\abovecaptionskip}{1pt plus 3pt minus 2pt}%
 }
 
