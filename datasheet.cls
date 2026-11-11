@@ -221,7 +221,7 @@
 \newlength{\@logoheight}\setlength{\@logoheight}{1.9cm} % title page logo height
 \newlength{\@logogap}\setlength{\@logogap}{5mm}          % gap between logo and rule
 \newlength{\@nologoshift}
-\setlength{\@nologoshift}{1.6cm}
+\setlength{\@nologoshift}{0.3cm}
 \newlength{\@dsfootskip}
 \AtBeginDocument{\setlength{\@dsfootskip}{\footskip}}
 \fancypagestyle{titlepage}{%
