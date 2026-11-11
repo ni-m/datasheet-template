@@ -33,7 +33,7 @@
 % Identification and options
 %==============================================================================%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{datasheet}[2024-01-08 Datasheet template by @ni-m]
+\ProvidesClass{datasheet}[2026-11-11 v0.2.0 LaTeX Datasheet template by @ni-m]
 
 % Pass all options on to article
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
