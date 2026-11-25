@@ -287,8 +287,12 @@
   {\par}
 
 % \dsplot[<includegraphics options>]{<file>}{<caption>}
-% Column-wide plot with a caption kept close to its image.
+% Column-wide plot with a centered caption kept close to its image.
 \newcommand{\dsplot}[3][]{%
-  \par\includegraphics[width=\columnwidth,#1]{#2}\par\nopagebreak
-  \vspace{2pt}{\small #3}\par
-  \vspace{\baselineskip}}
+  \par\addvspace{0.5\baselineskip}%
+  \begingroup
+    \centering
+    \includegraphics[width=\columnwidth,#1]{#2}\par\nopagebreak
+    \vspace{2pt}{\small #3}\par
+  \endgroup
+  \addvspace{\baselineskip}}
